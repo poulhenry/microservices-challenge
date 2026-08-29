@@ -10,5 +10,3 @@ spring:
       ddl-auto: update
 server:
   port: ${PRODUCT_SERVICE_PORT:8081}
-
-
