@@ -7,12 +7,26 @@ spring:
     password: ${ORDER_DB_PASSWORD:order_password}
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
   rabbitmq:
     host: ${RABBITMQ_HOST:localhost}
     port: ${RABBITMQ_PORT:5672}
     username: ${RABBITMQ_USERNAME:rabbitmq}
     password: ${RABBITMQ_PASSWORD:rabbitmq}
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
+      client:
+        config:
+          default:
+            connectTimeout: 3000
+            readTimeout: 2000
 server:
   port: ${ORDER_SERVICE_PORT:8080}
 
+product-service:
+  url: ${PRODUCT_SERVICE_URL:http://localhost:8081/products}
+
+payment-service:
+  url: ${PAYMENT_SERVICE_URL:http://localhost:8082/payments}
